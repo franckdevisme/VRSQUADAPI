@@ -9,13 +9,18 @@
 namespace App\Controller;
 
 use App\Entity\Entreprise;
-use App\Entity\user;
+use App\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Encoder\EncoderFactory;
+use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
+use FOS\UserBundle\Model\UserInterface;
+use Symfony\Component\Security\Core\Encoder\BCryptPasswordEncoder;
+use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 
 class UserController extends Controller
@@ -75,22 +80,29 @@ class UserController extends Controller
 
     }
 
-    /**
-     * function find user with user name and password in bdd if user is not empty else show error user not found
-     * @Route("/login", name="login")
-     * @Method({"Get"})
-     */
+    private $encoderFactory;
+
+    public function __construct(EncoderFactoryInterface $encoderFactory)
+    {
+        $this->encoderFactory = $encoderFactory;
+    }
+
+
     public function getUserByUsernameAction(Request $request)
     {
         $repository = $this->getDoctrine()->getRepository(User::class);
 
-        // query for a single Product by its primary key (usually "username")
 
-        $user = $repository->findOneBy(array('username' => $request->get('username'), 'password' => $request->get('password')));
+
+
+        $user = $repository->findOneBy(array('username' => $request->get('username')));
+        //$user = $repository->findOneBy(array('username' => $request->get('username')));
         /* @var $User user[] */
         if (empty($user)) {
             return new JsonResponse(['message' => 'username is not valide or password is not valide check your username or password '], Response::HTTP_NOT_FOUND);
         }
+
+       // dump($user);
         $formatted = [];
         $formatted[] = [
             'Nom' => $user->getNom(),
@@ -101,11 +113,7 @@ class UserController extends Controller
         return new JsonResponse($formatted);
     }
 
-    /**
-     * function find user with user name and password in bdd if user is not empty else show error user not found
-     * @Route("/login/{username}/{password}", name="login")
-     * @Method({"GET"})
-     */
+
     public function getUserByUsernamepassworAction($username, $password)
     {
         $repository = $this->getDoctrine()->getRepository(User::class);

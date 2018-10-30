@@ -1,6 +1,7 @@
 security:
     encoders:
         FOS\UserBundle\Model\UserInterface: bcrypt
+        Symfony\Component\Security\Core\User\User: bcrypt
 
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
@@ -19,8 +20,8 @@ security:
             pattern: ^/
             form_login:
                 provider: fos_userbundle
-                csrf_token_generator: security.csrf.token_manager
-
+                #csrf_token_generator: security.csrf.token_manager
+                 #security: false
             logout:       true
             anonymous:    true
 
