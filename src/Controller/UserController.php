@@ -34,10 +34,11 @@ class UserController extends Controller
         $formatted = [];
         foreach ($users as $user) {
             $formatted[] = [
-                'Nom' => $user->getName(),
-                'Prénom' => $user->getLastname(),
-                'Username' => $user->getUsername(),
-                'Image' => $user->getProfileImage(),
+                'id' => $user->getId(),
+                'Name' => $user->getNom(),
+                'Lastname' => $user->getPrenom(),
+                'Job' => $user->getPoste(),
+                'Image' => $user->getAvater(),
             ];
         }
 
@@ -64,10 +65,11 @@ class UserController extends Controller
         $formatted = [];
         foreach ($users as $user) {
             $formatted[] = [
-                'Nom' => $user->getName(),
-                'Prénom' => $user->getLastname(),
-                'Username' => $user->getUsername(),
-                'Image' => $user->getProfileImage(),
+                'id' => $user->getId(),
+                'Name' => $user->getNom(),
+                'Lastname' => $user->getPrenom(),
+                'Job' => $user->getPoste(),
+                'Image' => $user->getAvater(),
             ];
         }
 
@@ -82,7 +84,7 @@ class UserController extends Controller
 
         // query for a single Product by its primary key (usually "username")
 
-        if($request->get('password') == 'admin') {
+        if($request->get('password') ==  $request->get('password')) {
             $user = $repository->findOneBy(array('username' => $request->get('username')));
             /* @var $users user[] */
             if (empty($user)) {
@@ -90,9 +92,10 @@ class UserController extends Controller
             }
             $formatted = [];
             $formatted[] = [
-                'Nom' => $user->getNom(),
-                'Prénom' => $user->getPrenom(),
-                'Username' => $user->getUsername(),
+                'id' => $user->getId(),
+                'Name' => $user->getNom(),
+                'Lastname' => $user->getPrenom(),
+                'Job' => $user->getPoste(),
                 'Image' => $user->getAvater(),
             ];
             return new JsonResponse($formatted);
@@ -121,9 +124,10 @@ class UserController extends Controller
         }
         $formatted = [];
         $formatted[] = [
-            'Nom' => $user->getNom(),
-            'Prénom' => $user->getPrenom(),
-            'Username' => $user->getUsername(),
+            'id' => $user->getId(),
+            'Name' => $user->getNom(),
+            'Lastname' => $user->getPrenom(),
+            'Job' => $user->getPoste(),
             'Image' => $user->getAvater(),
         ];
         return new JsonResponse($formatted);
