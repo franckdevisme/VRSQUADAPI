@@ -22,11 +22,32 @@ class ContenuImg
     private $idcontenuImg;
 
     /**
-     * @var string|null
+     * @var string
      *
-     * @ORM\Column(name="name_image", type="text", length=0, nullable=true)
+     * @ORM\Column(name="name_image", type="string", length=255, nullable=false)
      */
     private $nameImage;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="url_image", type="text", length=0, nullable=false)
+     */
+    private $urlImage;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Formation", mappedBy="contenuImg")
+     */
+    private $formation;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->formation = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
 }

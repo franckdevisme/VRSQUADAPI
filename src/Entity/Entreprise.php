@@ -13,6 +13,69 @@ use Doctrine\ORM\Mapping as ORM;
 class Entreprise
 {
     /**
+     * @var string
+     *
+     * @ORM\Column(name="nom_entreprise", type="string", length=255, nullable=false)
+     */
+    private $nomEntreprise;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="adresse", type="string", length=255, nullable=false)
+     */
+    private $adresse;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="cp", type="integer", nullable=false)
+     */
+    private $cp;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ville", type="string", length=255, nullable=false)
+     */
+    private $ville;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pays", type="string", length=255, nullable=false)
+     */
+    private $pays;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type_de_souscription", type="string", length=255, nullable=false)
+     */
+    private $typeDeSouscription;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="debut_de_la_souscription", type="date", nullable=false)
+     */
+    private $debutDeLaSouscription;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="expiration_de_la_souscription", type="date", nullable=false)
+     */
+    private $expirationDeLaSouscription;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="isvalide", type="integer", nullable=false)
+     */
+    private $isvalide;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="idEntreprise", type="integer", nullable=false)
@@ -22,39 +85,18 @@ class Entreprise
     private $identreprise;
 
     /**
-     * @var string|null
+     * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\Column(name="nom_ent", type="string", length=45, nullable=true)
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="identreprise")
      */
-    private $nomEnt;
+    private $id;
 
     /**
-     * @var string|null
-     *
-     * @ORM\Column(name="adresse", type="string", length=45, nullable=true)
+     * Constructor
      */
-    private $adresse;
-
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="cp", type="integer", nullable=true)
-     */
-    private $cp;
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="ville", type="string", length=45, nullable=true)
-     */
-    private $ville;
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="paye", type="string", length=45, nullable=true)
-     */
-    private $paye;
-
+    public function __construct()
+    {
+        $this->id = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
 }
