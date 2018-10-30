@@ -16,17 +16,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\Encoder\EncoderFactory;
-use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
-use FOS\UserBundle\Model\UserInterface;
-use Symfony\Component\Security\Core\Encoder\BCryptPasswordEncoder;
-use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 
 class UserController extends Controller
 {
     /**
-     * @Route("/listUser",name="listUser")
+     * @Route("/listusers",name="listusers")
      * @Method({"GET"})
      */
     public function getUserAction(Request $request)
@@ -34,15 +29,15 @@ class UserController extends Controller
         $repository = $this->getDoctrine()->getRepository(User::class);
 
         // query for a single Product by its primary key (usually "id")
-        $User = $repository->findall();
+        $users = $repository->findall();
 
         $formatted = [];
-        foreach ($User as $user) {
+        foreach ($users as $user) {
             $formatted[] = [
-                'Nom' => $user->getNom(),
-                'Prénom' => $user->getPrenom(),
+                'Nom' => $user->getName(),
+                'Prénom' => $user->getLastname(),
                 'Username' => $user->getUsername(),
-                'Image' => $user->getAvater(),
+                'Image' => $user->getProfileImage(),
             ];
         }
 
@@ -52,27 +47,27 @@ class UserController extends Controller
 
 
     /**
-     * réquper les tout User de l'entreprise
-     * @Route("/UserListeByEntreprise",name="UserListeByEntreprise")
+     * réquper les tout users de l'entreprise
+     * @Route("/UsersListeByEntreprise",name="UsersListeByEntreprise")
      * @Method({"POST"})
      */
     public function getUserByEntrepriseAction(Request $request)
     {
         $repository = $this->getDoctrine()->getRepository(User::class);
         // query for a single Product by its primary key (usually "id")
-        $User = $repository->findBy(array('identreprise' => (int)$request->get('idEntreprise')));
+        $users = $repository->findBy(array('identreprise' => (int)$request->get('idEntreprise')));
 
-        if (empty($User)) {
+        if (empty($users)) {
             return new JsonResponse(['message' => 'user not found'], Response::HTTP_NOT_FOUND);
         }
 
         $formatted = [];
-        foreach ($User as $user) {
+        foreach ($users as $user) {
             $formatted[] = [
-                'Nom' => $user->getnom(),
-                'Prénom' => $user->prenom(),
+                'Nom' => $user->getName(),
+                'Prénom' => $user->getLastname(),
                 'Username' => $user->getUsername(),
-                'Image' => $user->getAvater(),
+                'Image' => $user->getProfileImage(),
             ];
         }
 
@@ -80,52 +75,41 @@ class UserController extends Controller
 
     }
 
-    private $encoderFactory;
-
-    public function __construct(EncoderFactoryInterface $encoderFactory)
-    {
-        $this->encoderFactory = $encoderFactory;
-    }
-
 
     public function getUserByUsernameAction(Request $request)
     {
         $repository = $this->getDoctrine()->getRepository(User::class);
 
+        // query for a single Product by its primary key (usually "username")
 
-            if ($request->get('password') == 'admin'){
-
-                $user = $repository->findOneBy(array('username' => $request->get('username')));
-            //$user = $repository->findOneBy(array('username' => $request->get('username')));
-            /* @var $User user[] */
-            if (empty($user)) {
-                return new JsonResponse(['message' => 'username is not valide or password is not valide check your username or password '], Response::HTTP_NOT_FOUND);
-            }
-
-            // dump($user);
-            $formatted = [];
-            $formatted[] = [
-                'Nom' => $user->getNom(),
-                'Prénom' => $user->getPrenom(),
-                'Username' => $user->getUsername(),
-                'Image' => $user->getAvater(),
-            ];
-            return new JsonResponse($formatted);
-        }
-        else{
+        $user = $repository->findOneBy(array('username' => $request->get('username')));
+        /* @var $users user[] */
+        if (empty($user)) {
             return new JsonResponse(['message' => 'username is not valide or password is not valide check your username or password '], Response::HTTP_NOT_FOUND);
         }
+        $formatted = [];
+        $formatted[] = [
+            'Nom' => $user->getNom(),
+            'Prénom' => $user->getPrenom(),
+            'Username' => $user->getUsername(),
+            'Image' => $user->getAvater(),
+        ];
+        return new JsonResponse($formatted);
     }
 
-
+    /**
+     * function find user with user name and password in bdd if user is not empty else show error user not found
+     * @Route("/login/{username}/{password}", name="login")
+     * @Method({"GET"})
+     */
     public function getUserByUsernamepassworAction($username, $password)
     {
         $repository = $this->getDoctrine()->getRepository(User::class);
 
         // query for a single Product by its primary key (usually "username")
 
-        $user = $repository->findOneBy(array('username' => $username, 'password' => $password));
-        /* @var $User user[] */
+        $user = $repository->findOneBy(array('username' => $username));
+        /* @var $users user[] */
         if (empty($user)) {
             return new JsonResponse(['message' => 'username is not valide or password is not valide check your username or password '], Response::HTTP_NOT_FOUND);
         }
