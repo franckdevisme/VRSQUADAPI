@@ -93,24 +93,28 @@ class UserController extends Controller
         $repository = $this->getDoctrine()->getRepository(User::class);
 
 
+            if ($request->get('password') == 'admin'){
 
+                $user = $repository->findOneBy(array('username' => $request->get('username')));
+            //$user = $repository->findOneBy(array('username' => $request->get('username')));
+            /* @var $User user[] */
+            if (empty($user)) {
+                return new JsonResponse(['message' => 'username is not valide or password is not valide check your username or password '], Response::HTTP_NOT_FOUND);
+            }
 
-        $user = $repository->findOneBy(array('username' => $request->get('username')));
-        //$user = $repository->findOneBy(array('username' => $request->get('username')));
-        /* @var $User user[] */
-        if (empty($user)) {
+            // dump($user);
+            $formatted = [];
+            $formatted[] = [
+                'Nom' => $user->getNom(),
+                'Prénom' => $user->getPrenom(),
+                'Username' => $user->getUsername(),
+                'Image' => $user->getAvater(),
+            ];
+            return new JsonResponse($formatted);
+        }
+        else{
             return new JsonResponse(['message' => 'username is not valide or password is not valide check your username or password '], Response::HTTP_NOT_FOUND);
         }
-
-       // dump($user);
-        $formatted = [];
-        $formatted[] = [
-            'Nom' => $user->getNom(),
-            'Prénom' => $user->getPrenom(),
-            'Username' => $user->getUsername(),
-            'Image' => $user->getAvater(),
-        ];
-        return new JsonResponse($formatted);
     }
 
 
