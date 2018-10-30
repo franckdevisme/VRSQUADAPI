@@ -82,19 +82,24 @@ class UserController extends Controller
 
         // query for a single Product by its primary key (usually "username")
 
-        $user = $repository->findOneBy(array('username' => $request->get('username')));
-        /* @var $users user[] */
-        if (empty($user)) {
+        if($request->get('password') == 'admin') {
+            $user = $repository->findOneBy(array('username' => $request->get('username')));
+            /* @var $users user[] */
+            if (empty($user)) {
+                return new JsonResponse(['message' => 'username is not valide or password is not valide check your username or password '], Response::HTTP_NOT_FOUND);
+            }
+            $formatted = [];
+            $formatted[] = [
+                'Nom' => $user->getNom(),
+                'Prénom' => $user->getPrenom(),
+                'Username' => $user->getUsername(),
+                'Image' => $user->getAvater(),
+            ];
+            return new JsonResponse($formatted);
+        }
+        else{
             return new JsonResponse(['message' => 'username is not valide or password is not valide check your username or password '], Response::HTTP_NOT_FOUND);
         }
-        $formatted = [];
-        $formatted[] = [
-            'Nom' => $user->getNom(),
-            'Prénom' => $user->getPrenom(),
-            'Username' => $user->getUsername(),
-            'Image' => $user->getAvater(),
-        ];
-        return new JsonResponse($formatted);
     }
 
     /**
@@ -107,6 +112,7 @@ class UserController extends Controller
         $repository = $this->getDoctrine()->getRepository(User::class);
 
         // query for a single Product by its primary key (usually "username")
+
 
         $user = $repository->findOneBy(array('username' => $username));
         /* @var $users user[] */

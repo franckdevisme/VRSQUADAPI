@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="1a2c865d-e51f-4417-b65e-c73227030339" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/SecurityController.php" afterPath="" />
       <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,22 +20,12 @@
       <file leaf-file-name="UserController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Controller/UserController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="535">
-              <caret line="106" column="62" lean-forward="false" selection-start-line="106" selection-start-column="62" selection-end-line="106" selection-end-column="62" />
+            <state relative-caret-position="433">
+              <caret line="100" column="162" lean-forward="false" selection-start-line="100" selection-start-column="162" selection-end-line="100" selection-end-column="162" />
               <folding>
                 <element signature="e#6#87#0#PHP" expanded="true" />
                 <element signature="e#116#142#0#PHP" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="routes.yaml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/routes.yaml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="86" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="10" selection-end-column="86" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -223,6 +212,18 @@
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
+            <path>
+              <item name="REST-API-VRSQUAD" type="b2602c69:ProjectViewProjectNode" />
+              <item name="REST-API-VRSQUAD" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Entity" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="REST-API-VRSQUAD" type="b2602c69:ProjectViewProjectNode" />
+              <item name="REST-API-VRSQUAD" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Migrations" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -268,12 +269,12 @@
       <workItem from="1539073102216" duration="1209000" />
       <workItem from="1540828252186" duration="155000" />
       <workItem from="1540829942337" duration="18201000" />
-      <workItem from="1540911583381" duration="454000" />
+      <workItem from="1540911583381" duration="2110000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35013000" />
+    <option name="totallyTimeSpent" value="36669000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -425,13 +426,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/User.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3502">
-          <caret line="206" column="29" lean-forward="false" selection-start-line="206" selection-start-column="20" selection-end-line="206" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/services.yaml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
@@ -480,6 +474,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="281">
           <caret line="97" column="26" lean-forward="false" selection-start-line="97" selection-start-column="22" selection-end-line="97" selection-end-column="26" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -487,6 +482,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="349">
           <caret line="438" column="21" lean-forward="true" selection-start-line="438" selection-start-column="21" selection-end-line="438" selection-end-column="21" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -590,10 +586,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="25" column="23" lean-forward="false" selection-start-line="25" selection-start-column="23" selection-end-line="25" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/UserController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="535">
-          <caret line="106" column="62" lean-forward="false" selection-start-line="106" selection-start-column="62" selection-end-line="106" selection-end-column="62" />
+        <state relative-caret-position="433">
+          <caret line="100" column="162" lean-forward="false" selection-start-line="100" selection-start-column="162" selection-end-line="100" selection-end-column="162" />
           <folding>
             <element signature="e#6#87#0#PHP" expanded="true" />
             <element signature="e#116#142#0#PHP" expanded="true" />
